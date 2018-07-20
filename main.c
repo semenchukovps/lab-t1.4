@@ -28,14 +28,11 @@ int main(int argc, char *argv[]){
 	if(procB != 0){									//Process A
 		while(true){ 								
 			close(pipefd[0]);
-			fflush(stdin);
 			printf("Input value: ");
 			scanf("%d", &value);
 			write(pipefd[1], &value, sizeof(value));
 			printf("Parent(%d) send value: %d\n", getpid(), value);
 			close(pipefd[1]);
-			//wait(NULL);
-			//printf("%d", procB );
 			sleep(1);
 		}
 	}else{ 											//Process B
@@ -93,31 +90,3 @@ void * sendMsg(void * arg){
 void * getValue(){
 	
 }
-	
-	//printf("Proc 2: %d \n", procA);
-	/*if(fork()){
-		printf("Proc 1: %d \n", getpid());
-		if(fork()){
-			printf("Proc 2: %d \n", getpid());
-		}else{
-			printf("Proc 3: %d \n", getpid());
-	}
-	}else{
-		printf("Proc 4: %d \n", getpid());
-	}	*/
-
-	//if (cpid == 0) {    /* Child reads from pipe */
-	//	close(pipefd[1]);          /* Close unused write end */
-	
-	//while (read(pipefd[0], &buf, sizeof(buf)) > 0)
-	//	close(pipefd[0]);
-	//} else {            /* Parent writes argv[1] to pipe */
-	//	close(pipefd[0]);          /* Close unused read end */
-	//	int value;
-	//	printf("Enter integer value (10 to exit): ");
-	//	scanf("%d", &value);
-	//	write(pipefd[1], &value, sizeof(value));
-	//	close(pipefd[1]);          /* Reader will see EOF */
-	//	wait(NULL);                /* Wait for child */
-
-
